@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>【Termux】第1期：在手机中安装Linux系统</title>
+      <link href="/2022/12/26/Termux-1/"/>
+      <url>/2022/12/26/Termux-1/</url>
+      
+        <content type="html"><![CDATA[<h1 id="什么是-Termux"><a href="#什么是-Termux" class="headerlink" title="什么是 Termux"></a>什么是 Termux</h1><p>Termux 是一个 <strong>Android 终端仿真应用程序</strong>，用于在 <strong>Android 手机上搭建 Linux 环境</strong>， <strong>不需要 root 权限</strong> Termux 就可以正常运行。Termux 可以实现 Linux 下的许多基本操作，可以使用 Termux 安装 python，并实现 python 编程。最重要的是，可以在 Termux 中安装容器，实现<strong>完整的 Linux 系统</strong>。</p><h1 id="Termux-安装"><a href="#Termux-安装" class="headerlink" title="Termux 安装"></a>Termux 安装</h1><p>Termux 可以在<a href="https://github.com/termux/termux-app/releases/download/v0.118.0/termux-app_v0.118.0+github-debug_universal.apk">github中下载</a><br>如果无法访问github，也可以通过<a href="https://mirrors.tuna.tsinghua.edu.cn/fdroid/repo/com.termux_118.apk">清华镜像源下载</a></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>VisionTransformer 论文解读</title>
+      <link href="/2022/12/23/VisionTransformer/"/>
+      <url>/2022/12/23/VisionTransformer/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Transformer结构"><a href="#Transformer结构" class="headerlink" title="Transformer结构"></a>Transformer结构</h1><p><strong>Vision Transformer的结构如图所示：</strong><br><img src="pic1.png" height="500px"><br>在Vision Transformer中，主要使用的结构为<strong>左侧的编码器</strong></p><h1 id="将Transformer直接用在视觉领域的问题"><a href="#将Transformer直接用在视觉领域的问题" class="headerlink" title="将Transformer直接用在视觉领域的问题"></a>将Transformer直接用在视觉领域的问题</h1><p>想要使用Transformer结构，需要把图片转化为一行Token。<strong>而最朴素的想法是直接将图片的像素一行一行读取，转化为一排的Token</strong>，如图：<br><img src="pic2.png" height="250px"><br>但是这样的做法会导致输入数据复杂度会随着图片的长度和宽度<strong>平方级增长</strong></p><h1 id="Transformer用在视觉领域的解决方案"><a href="#Transformer用在视觉领域的解决方案" class="headerlink" title="Transformer用在视觉领域的解决方案"></a>Transformer用在视觉领域的解决方案</h1><p><strong>1.采用局部注意力机制</strong><br><strong>2.改进attention公式</strong><br><strong>3.图像化整为零，切分为patch</strong><br>每一种方法都可行，也都有相关论文发表。在ViT中，采用的是第三种方案。</p><h1 id="ViT模型架构"><a href="#ViT模型架构" class="headerlink" title="ViT模型架构"></a>ViT模型架构</h1><h2 id="ViT模型架构图"><a href="#ViT模型架构图" class="headerlink" title="ViT模型架构图"></a>ViT模型架构图</h2><img src="pic3.png" height="400px"><h2 id="ViT模型步骤讲解"><a href="#ViT模型步骤讲解" class="headerlink" title="ViT模型步骤讲解"></a>ViT模型步骤讲解</h2><h3 id="1-图片划分为patch"><a href="#1-图片划分为patch" class="headerlink" title="1.图片划分为patch"></a>1.图片划分为patch</h3><p>模型首先将图片划分为一个一个的patch</p><h3 id="2-patch转化为embedding"><a href="#2-patch转化为embedding" class="headerlink" title="2.patch转化为embedding"></a>2.patch转化为embedding</h3><p>由于正方形的patch无法直接作为Transformer的输入，模型采用Liner Projection将正方形的patch拉成一条线，并映射到Transformer的输入的维度</p><h3 id="3-位置embedding与tokenembedding相加"><a href="#3-位置embedding与tokenembedding相加" class="headerlink" title="3.位置embedding与tokenembedding相加"></a>3.位置embedding与tokenembedding相加</h3><p>在这一步中，论文中生成了CLS符号的token embedding，并生成了所有符号的position embedding，最后将token embedding与position embedding相加</p><h3 id="4-输入到Transformer-Encoder中"><a href="#4-输入到Transformer-Encoder中" class="headerlink" title="4.输入到Transformer Encoder中"></a>4.输入到Transformer Encoder中</h3><h3 id="5-通过CLS符号做多分类任务"><a href="#5-通过CLS符号做多分类任务" class="headerlink" title="5.通过CLS符号做多分类任务"></a>5.通过CLS符号做多分类任务</h3>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+  
+  
+</search>
