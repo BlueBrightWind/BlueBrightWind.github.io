@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>【Termux】第2期：通过 ssh 连接手机 Termux 服务器</title>
+      <link href="/2022/12/28/Termux-2/"/>
+      <url>/2022/12/28/Termux-2/</url>
+      
+        <content type="html"><![CDATA[<h1 id="上期回顾"><a href="#上期回顾" class="headerlink" title="上期回顾"></a>上期回顾</h1><p>在上一期中，在 Termux 软件中通过 proot 容器安装了 Ubuntu 22.04 系统。这个是完整的 Linux 系统，可以像操作远程服务器一样对容器进行操作。但由于是手机软件模拟的容器，在开启一些服务的时候并不能像一般的 Linux 系统一样操作，需要一些特殊的方式。本期主要讲述开启 ssh 服务，可以通过电脑端使用 VS Code 对手机服务器进行操作。</p><h1 id="进入-Termux-proot-容器"><a href="#进入-Termux-proot-容器" class="headerlink" title="进入 Termux proot 容器"></a>进入 Termux proot 容器</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">debian</span><br></pre></td></tr></table></figure><img src="pic2.jpg" width='400px'><h1 id="通过-apt-方式安装-openssh-server"><a href="#通过-apt-方式安装-openssh-server" class="headerlink" title="通过 apt 方式安装 openssh-server"></a>通过 apt 方式安装 openssh-server</h1><p>执行以下指令，安装 openssh-server</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt update</span><br><span class="line">apt install openssh-server</span><br></pre></td></tr></table></figure><img src="pic3.jpg" width='400px'>安装完成后显示如下：<img src="pic4.jpg" width='400px'><h1 id="修改-openssh-默认启动端口"><a href="#修改-openssh-默认启动端口" class="headerlink" title="修改 openssh 默认启动端口"></a>修改 openssh 默认启动端口</h1><p>由于通过 proot 容器的方式安装系统，在这种方式下 Android 系统会对软件做出限制，使得软件无法启用1024以下的端口号。openssh默认端口号为22，需要将端口号更改为1024以上的端口，端口号可以随意指定，这里我们将端口号改为8022端口。</p><h2 id="进入-openssh-server-配置文件夹"><a href="#进入-openssh-server-配置文件夹" class="headerlink" title="进入 openssh-server 配置文件夹"></a>进入 openssh-server 配置文件夹</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/ssh</span><br></pre></td></tr></table></figure><h2 id="通过-vim-编辑器修改配置"><a href="#通过-vim-编辑器修改配置" class="headerlink" title="通过 vim 编辑器修改配置"></a>通过 vim 编辑器修改配置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim sshd_config</span><br></pre></td></tr></table></figure><img src="pic5.jpg" width='400px'><ol><li>进入编辑器后，输入 i 进入编辑模式</li><li>找到 Port ，删除前面的 # ，将22修改为8022</li><li>按 ↓ ，找到 PermitRootLogin ，删除前面的 #，将后面的内容修改为 yes</li><li>修改完成后，按 Esc 退出编辑模式</li><li>输入 :wq ,回车保存退出</li></ol>如图所示，进入编辑器后可以看到如下界面：<img src="pic6.jpg" width='400px'>需要修改 Port 和 PermitRootLogin 两个属性<img src="pic7.jpg" width='400px'><img src="pic8.jpg" width='400px'><h1 id="开启-ssh-服务"><a href="#开启-ssh-服务" class="headerlink" title="开启 ssh 服务"></a>开启 ssh 服务</h1><p>配置完成后，执行以下指令，开启 ssh 服务</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service ssh start</span><br></pre></td></tr></table></figure><p>执行以下指令，检查 ssh 状态</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service ssh status</span><br></pre></td></tr></table></figure><p>若显示 sshd is running，则启动成功，如图所示：<br><img src="pic9.jpg" width='400px'></p><h1 id="开机自动启动-ssh-服务"><a href="#开机自动启动-ssh-服务" class="headerlink" title="开机自动启动 ssh 服务"></a>开机自动启动 ssh 服务</h1><p>对于 tmoe 工具，可以通过修改配置文件实现启动容器的同时自动开启服务<br>执行如下指令，进入配置文件夹：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/local/etc/tmoe-linux/environment</span><br></pre></td></tr></table></figure><p>编辑 entrypoint 文件</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim entrypoint</span><br></pre></td></tr></table></figure><p>写入如下指令，编辑方式同上</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> 开启 ssh 服务</span><br><span class="line">service ssh start</span><br></pre></td></tr></table></figure><p>保存退出，方式同上<br>如图所示：<br><img src="pic10.jpg" width='400px'><br><img src="pic11.jpg" width='400px'></p><h1 id="验证-ssh-服务是否自启"><a href="#验证-ssh-服务是否自启" class="headerlink" title="验证 ssh 服务是否自启"></a>验证 ssh 服务是否自启</h1><p>输入如下指令，退出容器</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">logout</span></span><br></pre></td></tr></table></figure><p>输入如下指令，重新启动容器</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">debian</span><br></pre></td></tr></table></figure><p>如果看到以下语句，则自启成功<br><img src="pic12.jpg" width='400px'></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Termux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 手机搭建服务器 </tag>
+            
+            <tag> Termux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>SwinTransformer</title>
+      <link href="/2022/12/28/SwinTransformer/"/>
+      <url>/2022/12/28/SwinTransformer/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      <categories>
+          
+          <category> 论文解读 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 论文解读 </tag>
+            
+            <tag> SwinTransformer </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Termux】第1期：在手机中安装Linux系统</title>
       <link href="/2022/12/26/Termux-1/"/>
       <url>/2022/12/26/Termux-1/</url>
