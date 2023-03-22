@@ -1,0 +1,216 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>【Termux】第1期：在手机中安装Linux系统 | 蓝灵风の博客</title><meta name="author" content="蓝灵风"><meta name="copyright" content="蓝灵风"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="什么是 TermuxTermux 是一个 Android 终端仿真应用程序，用于在 Android 手机上搭建 Linux 环境， 不需要 root 权限 Termux 就可以正常运行。Termux 可以实现 Linux 下的许多基本操作，可以使用 Termux 安装 python，并实现 python 编程。最重要的是，可以在 Termux 中安装容器，实现完整的 Linux 系统。 Termu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Termux】第1期：在手机中安装Linux系统">
+<meta property="og:url" content="https://bluebrightwind.github.io/2022/12/26/Termux-1/index.html">
+<meta property="og:site_name" content="蓝灵风の博客">
+<meta property="og:description" content="什么是 TermuxTermux 是一个 Android 终端仿真应用程序，用于在 Android 手机上搭建 Linux 环境， 不需要 root 权限 Termux 就可以正常运行。Termux 可以实现 Linux 下的许多基本操作，可以使用 Termux 安装 python，并实现 python 编程。最重要的是，可以在 Termux 中安装容器，实现完整的 Linux 系统。 Termu">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bluebrightwind.github.io/2022/12/26/Termux-1/termux.png">
+<meta property="article:published_time" content="2022-12-26T15:45:15.000Z">
+<meta property="article:modified_time" content="2023-03-22T16:57:30.286Z">
+<meta property="article:author" content="蓝灵风">
+<meta property="article:tag" content="手机搭建服务器">
+<meta property="article:tag" content="Termux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bluebrightwind.github.io/2022/12/26/Termux-1/termux.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://bluebrightwind.github.io/2022/12/26/Termux-1/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '【Termux】第1期：在手机中安装Linux系统',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-03-23 00:57:30'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/mycss.css"><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="蓝灵风の博客" type="application/atom+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/2022/12/26/Termux-1/termux.png')"><nav id="nav"><span id="blog-info"><a href="/" title="蓝灵风の博客"><span class="site-name">蓝灵风の博客</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">【Termux】第1期：在手机中安装Linux系统</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-12-26T15:45:15.000Z" title="发表于 2022-12-26 23:45:15">2022-12-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-03-22T16:57:30.286Z" title="更新于 2023-03-23 00:57:30">2023-03-23</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Termux/">Termux</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="【Termux】第1期：在手机中安装Linux系统"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="什么是-Termux"><a href="#什么是-Termux" class="headerlink" title="什么是 Termux"></a>什么是 Termux</h1><p>Termux 是一个 <strong>Android 终端仿真应用程序</strong>，用于在 <strong>Android 手机上搭建 Linux 环境</strong>， <strong>不需要 root 权限</strong> Termux 就可以正常运行。Termux 可以实现 Linux 下的许多基本操作，可以使用 Termux 安装 python，并实现 python 编程。最重要的是，可以在 Termux 中安装容器，实现<strong>完整的 Linux 系统</strong>。</p>
+<h1 id="Termux-安装"><a href="#Termux-安装" class="headerlink" title="Termux 安装"></a>Termux 安装</h1><h2 id="Termux下载"><a href="#Termux下载" class="headerlink" title="Termux下载"></a>Termux下载</h2><p>Termux 可以在<a target="_blank" rel="noopener" href="https://github.com/termux/termux-app/releases/download/v0.118.0/termux-app_v0.118.0+github-debug_universal.apk">github中下载</a><br>如果无法访问github，也可以通过<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/fdroid/repo/com.termux_118.apk">清华镜像源下载</a></p>
+<h1 id="开始部署-Linux-环境"><a href="#开始部署-Linux-环境" class="headerlink" title="开始部署 Linux 环境"></a>开始部署 Linux 环境</h1><p>对于新手而言，推荐使用别人开发好的脚本。这里推荐使用 <strong>天萌 tmoe</strong> 脚本，里面集成了很多的功能，对新手比较友好。缺点是安装好的环境有一些冗余，大家可以在用熟后自己部署 Linux 环境。<br>打开 Termux ，界面如下：<br><img src="pic1.jpg"><br>如果可以访问github，使用以下指令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -LO --compressed https://raw.githubusercontent.com/2moe/tmoe/2/2.awk; awk -f 2.awk</span><br></pre></td></tr></table></figure>
+<p>如果无法访问github，使用以下指令，从gitee仓库中克隆：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -LO https://gitee.com/mo2/linux/raw/2/2.awk; awk -f 2.awk</span><br></pre></td></tr></table></figure>
+<p>在执行指令后，会自动下载脚本，选择通过gitee下载<br><img src="pic2.jpg"></p>
+<p>可以看到选择语言界面，语言选择中文<br><img src="pic3.jpg"></p>
+<p>这里选择proot容器,选择后会自动安装相关依赖。安装过程中会提示换源，按回车选择北外源<br><img src="pic4.jpg" width='400px'></p>
+<p>执行过程中会遇到这样的选项，直接按回车即可<br><img src="pic5.jpg" width='400px'></p>
+<p>继续选择proot容器<br><img src="pic6.jpg" width='400px'></p>
+<p>终端配色看个人喜好，这里选择了neon<br><img src="pic7.jpg" width='400px'></p>
+<p>字体选择Inconsolata-go(粗)<br><img src="pic8.jpg" width='400px'></p>
+<p>修改小键选择 Yes<br><img src="pic9.jpg" width='400px'></p>
+<p>DNS选择第一个即可<br><img src="pic10.jpg" width='400px'></p>
+<p>一言看个人喜好，这里没有开启一言功能<br><img src="pic11.jpg" width='400px'></p>
+<p>时区根据个人所在地选择<br><img src="pic12.jpg" width='400px'></p>
+<p>挂载目录推荐选择挂载部分目录，这里只挂载了手机中Download目录，即Termux只可以读取手机中Download目录下的内容<br><img src="pic13.jpg" width='400px'></p>
+<p>目录挂载的位置，这里挂载到了/home中<br><img src="pic14.jpg" width='400px'></p>
+<p>选择proot容器中安装的系统，这里安装Ubuntu 22.04系统<br><img src="pic15.jpg" width='400px'><br><img src="pic16.jpg" width='400px'><br><img src="pic17.jpg" width='400px'></p>
+<p>选择启动即可<br><img src="pic18.jpg" width='400px'></p>
+<p>接下来需要等待一段时间，安装完成后，出现如下界面，选择 <strong>否</strong><br><img src="pic19.jpg" width='400px'></p>
+<p>这里选择不配置zsh<br><img src="pic20.jpg" width='400px'></p>
+<p>选择删除zsh.sh<br><img src="pic21.jpg" width='400px'></p>
+<p>选择不启动 tmoe tools<br><img src="pic22.jpg" width='400px'></p>
+<p>配置完成后，即可进入Ubuntu 22.04系统<br><img src="pic23.jpg" width='400px'></p>
+<h1 id="在proot容器中安装-tmoe-tools"><a href="#在proot容器中安装-tmoe-tools" class="headerlink" title="在proot容器中安装 tmoe tools"></a>在proot容器中安装 tmoe tools</h1><p>先前已经在Termux中安装了tmoe tools，这里在容器中同样安装 tmoe tools，方便后续对系统进行软件安装和配置<br>输入如下指令后，进行 tmoe tools 自动安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tmoe</span><br></pre></td></tr></table></figure>
+<p>安装完成后出现如下界面，选择退出即可<br><img src="pic24.jpg" width='400px'></p>
+<h1 id="退出容器，返回-Termux"><a href="#退出容器，返回-Termux" class="headerlink" title="退出容器，返回 Termux"></a>退出容器，返回 Termux</h1><p>输入如下指令，直至出现 <strong>按回车键返回</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></figure>
+<img src="pic25.jpg" width='400px'>
+
+<p>按下回车，按 ——&gt; 选择cancel<br><img src="pic26.jpg" width='400px'><br><img src="pic27.jpg" width='400px'><br><img src="pic28.jpg" width='400px'><br><img src="pic29.jpg" width='400px'></p>
+<p>当出现如下界面时，说明已经返回到了 Termux<br><img src="pic30.jpg" width='400px'><br>输入如下指令，清理屏幕</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clear</span><br></pre></td></tr></table></figure>
+<img src="pic31.jpg" width='400px'>
+
+<p>至此，安装完成</p>
+<h1 id="如何使用？"><a href="#如何使用？" class="headerlink" title="如何使用？"></a>如何使用？</h1><p>退出Termux后，想要重新进入容器，可以输入如下指令，进入容器（即刚刚安装的Ubuntu系统）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">debian</span><br></pre></td></tr></table></figure>
+<p>在进入容器后，即可按照正常的Linux系统进行使用</p>
+<p>进入容器后，想要退出容器返回 Termux ，可以输入如下指令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">logout</span></span><br></pre></td></tr></table></figure>
+
+<p>在容器中想要退出程序的时候，最好<strong>先退出容器再关闭app</strong>，防止丢失数据</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://bluebrightwind.github.io">蓝灵风</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://bluebrightwind.github.io/2022/12/26/Termux-1/">https://bluebrightwind.github.io/2022/12/26/Termux-1/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://bluebrightwind.github.io" target="_blank">蓝灵风の博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%89%8B%E6%9C%BA%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/">手机搭建服务器</a><a class="post-meta__tags" href="/tags/Termux/">Termux</a></div><div class="post_share"><div class="social-share" data-image="/2022/12/26/Termux-1/termux.png" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/12/28/Termux-2/" title="【Termux】第2期：通过 ssh 连接手机 Termux 服务器"><img class="cover" src="/2022/12/28/Termux-2/termux.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">【Termux】第2期：通过 ssh 连接手机 Termux 服务器</div></div></a></div><div class="next-post pull-right"><a href="/2022/12/23/VisionTransformer/" title="VisionTransformer 论文解读"><img class="cover" src="/2022/12/23/VisionTransformer/index_img.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">VisionTransformer 论文解读</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/12/28/Termux-2/" title="【Termux】第2期：通过 ssh 连接手机 Termux 服务器"><img class="cover" src="/2022/12/28/Termux-2/termux.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-28</div><div class="title">【Termux】第2期：通过 ssh 连接手机 Termux 服务器</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">蓝灵风</div><div class="author-info__description">敏于思考，锐于实现</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://space.bilibili.com/21796142"><i class="fab"></i><span>B站主页</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-Termux"><span class="toc-number">1.</span> <span class="toc-text">什么是 Termux</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Termux-%E5%AE%89%E8%A3%85"><span class="toc-number">2.</span> <span class="toc-text">Termux 安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Termux%E4%B8%8B%E8%BD%BD"><span class="toc-number">2.1.</span> <span class="toc-text">Termux下载</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%80%E5%A7%8B%E9%83%A8%E7%BD%B2-Linux-%E7%8E%AF%E5%A2%83"><span class="toc-number">3.</span> <span class="toc-text">开始部署 Linux 环境</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9C%A8proot%E5%AE%B9%E5%99%A8%E4%B8%AD%E5%AE%89%E8%A3%85-tmoe-tools"><span class="toc-number">4.</span> <span class="toc-text">在proot容器中安装 tmoe tools</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%80%80%E5%87%BA%E5%AE%B9%E5%99%A8%EF%BC%8C%E8%BF%94%E5%9B%9E-Termux"><span class="toc-number">5.</span> <span class="toc-text">退出容器，返回 Termux</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%EF%BC%9F"><span class="toc-number">6.</span> <span class="toc-text">如何使用？</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/03/18/Orangepi-1/" title="【香橙派5】RK3588s部署yolov5 - 训练部分"><img src="/2023/03/18/Orangepi-1/index.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【香橙派5】RK3588s部署yolov5 - 训练部分"/></a><div class="content"><a class="title" href="/2023/03/18/Orangepi-1/" title="【香橙派5】RK3588s部署yolov5 - 训练部分">【香橙派5】RK3588s部署yolov5 - 训练部分</a><time datetime="2023-03-17T17:31:27.000Z" title="发表于 2023-03-18 01:31:27">2023-03-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/12/28/Termux-2/" title="【Termux】第2期：通过 ssh 连接手机 Termux 服务器"><img src="/2022/12/28/Termux-2/termux.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【Termux】第2期：通过 ssh 连接手机 Termux 服务器"/></a><div class="content"><a class="title" href="/2022/12/28/Termux-2/" title="【Termux】第2期：通过 ssh 连接手机 Termux 服务器">【Termux】第2期：通过 ssh 连接手机 Termux 服务器</a><time datetime="2022-12-28T13:21:42.000Z" title="发表于 2022-12-28 21:21:42">2022-12-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/12/26/Termux-1/" title="【Termux】第1期：在手机中安装Linux系统"><img src="/2022/12/26/Termux-1/termux.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【Termux】第1期：在手机中安装Linux系统"/></a><div class="content"><a class="title" href="/2022/12/26/Termux-1/" title="【Termux】第1期：在手机中安装Linux系统">【Termux】第1期：在手机中安装Linux系统</a><time datetime="2022-12-26T15:45:15.000Z" title="发表于 2022-12-26 23:45:15">2022-12-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/12/23/VisionTransformer/" title="VisionTransformer 论文解读"><img src="/2022/12/23/VisionTransformer/index_img.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="VisionTransformer 论文解读"/></a><div class="content"><a class="title" href="/2022/12/23/VisionTransformer/" title="VisionTransformer 论文解读">VisionTransformer 论文解读</a><time datetime="2022-12-23T12:04:06.000Z" title="发表于 2022-12-23 20:04:06">2022-12-23</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 蓝灵风</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="255,255,255" opacity="0.9" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></body></html>
