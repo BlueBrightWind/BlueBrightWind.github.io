@@ -1,5 +1,5 @@
 ---
-title: 【香橙派5】RK3588s部署yolov5 - 训练
+title: 【香橙派5】RK3588s部署yolov5 - 训练部分
 date: 2023-03-18 01:31:27
 cover: index.png
 tags:
