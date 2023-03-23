@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   hexo: ^5.0.0
   hexo-browsersync: ^0.3.0
+  hexo-deployer-git: ^4.0.0
   hexo-generator-archive: ^1.0.0
   hexo-generator-category: ^1.0.0
   hexo-generator-feed: ^3.0.0
@@ -23,6 +24,7 @@ specifiers:
 dependencies:
   hexo: 5.4.2
   hexo-browsersync: 0.3.0
+  hexo-deployer-git: 4.0.0
   hexo-generator-archive: 1.0.0
   hexo-generator-category: 1.0.0
   hexo-generator-feed: 3.0.0
@@ -1231,6 +1233,20 @@ packages:
       tildify: 2.0.0
     dev: false
 
+  /hexo-deployer-git/4.0.0:
+    resolution: {integrity: sha512-28t1Q+4taB/UaBAP52W3mD/wcCwa2y2zBieUfBJFBZudbmVgiKJB5YedYILeyI5QByaUKAOwoupmdTbocdQ+CQ==}
+    engines: {node: '>=14'}
+    dependencies:
+      bluebird: 3.7.2
+      hexo-fs: 4.1.1
+      hexo-util: 2.7.0
+      luxon: 3.3.0
+      nunjucks: 3.2.3
+      picocolors: 1.0.0
+    transitivePeerDependencies:
+      - chokidar
+    dev: false
+
   /hexo-front-matter/2.0.0:
     resolution: {integrity: sha512-IR3tjAyK2Ga/0a/WDAoNy5+n3ju2/mkuAsCDEeGgGLf5+7kkiOkkG/FrnueuYgz0h2MPfWDLBiDsSTCmB0sLCA==}
     engines: {node: '>=10.13.0'}
@@ -1241,6 +1257,16 @@ packages:
   /hexo-fs/3.1.0:
     resolution: {integrity: sha512-SfoDH7zlU9Iop+bAfEONXezbNIkpVX1QqjNCBYpapilZR+xVOCfTEdlNixanrKBbLGPb2fXqrdDBFgrKuiVGQQ==}
     engines: {node: '>=10.13.0'}
+    dependencies:
+      bluebird: 3.7.2
+      chokidar: 3.5.3
+      graceful-fs: 4.2.11
+      hexo-util: 2.7.0
+    dev: false
+
+  /hexo-fs/4.1.1:
+    resolution: {integrity: sha512-aDysNTyv8ElcerbFVbPLRXnYt+QDY6gAOZZ5DLbCxudY0Ywppqd+uZ03gZ2BDypIBvmNB27WYWYz76M+Yv/YXw==}
+    engines: {node: '>=14'}
     dependencies:
       bluebird: 3.7.2
       chokidar: 3.5.3
@@ -1827,6 +1853,11 @@ packages:
     resolution: {integrity: sha512-7fm3l3NAF9WfN6W3JOmf5drwpVqX78JtoGJ3A6W0a6ZnldM41w2fV5D490psKFTpMds8TJse/eHLFFsNHHjHgg==}
     dependencies:
       tslib: 2.5.0
+    dev: false
+
+  /luxon/3.3.0:
+    resolution: {integrity: sha512-An0UCfG/rSiqtAIiBPO0Y9/zAnHUZxAMiCpTd5h2smgsj7GGmcenvrvww2cqNA8/4A5ZrD1gJpHN2mIHZQF+Mg==}
+    engines: {node: '>=12'}
     dev: false
 
   /marked/2.1.3:
