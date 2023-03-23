@@ -1,7 +1,7 @@
+https://bluebrightwind.github.io/2023/03/18/Orangepi-1/
 https://bluebrightwind.github.io/2022/12/26/Termux-1/
 https://bluebrightwind.github.io/categories/index.html
 https://bluebrightwind.github.io/2022/12/23/VisionTransformer/
-https://bluebrightwind.github.io/2023/03/18/Orangepi-1/
 https://bluebrightwind.github.io/2022/12/28/Termux-2/
 https://bluebrightwind.github.io/tags/index.html
 https://bluebrightwind.github.io/
