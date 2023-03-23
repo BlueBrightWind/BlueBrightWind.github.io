@@ -32,7 +32,7 @@ yolov5有很多个版本，这里我们采用官方修改过的yolov5进行训�
 
 ## 数据集整理
 将数据集整理为如下格式，在yolov5根目录下新建myData文件夹，并做如下处理：
-```
+```TEXT
 ├─ yolov5根目录
 │    ├─ xxxxxx
 │    ├─ xxxxxx
