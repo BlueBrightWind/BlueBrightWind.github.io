@@ -1,5 +1,5 @@
 ---
-title: 【Termux】第2期：通过 ssh 连接手机 Termux 服务器
+title: 【Termux】第2期：通过 ssh 连接手机 Termux 服务器 2222
 date: 2022-12-28 21:21:42
 cover: termux.png
 tags: 
