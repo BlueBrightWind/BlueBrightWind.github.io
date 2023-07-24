@@ -31,7 +31,7 @@
     "hexo-renderer-stylus": "^2.1.0",
     "hexo-server": "^2.0.0",
     "hexo-theme-landscape": "^0.0.3",
-    "hexo-util": "^3.0.1",
+    "hexo-util": "^3.1.0",
     "pm2": "^5.3.0",
     "utils-merge": "^1.0.1"
   }
