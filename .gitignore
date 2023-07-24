@@ -1,3 +1,3 @@
-/MyBlog/.deploy_git
-/MyBlog/node_modules
-/MyBlog/db.json
+/.deploy_git
+/node_modules
+/db.json
