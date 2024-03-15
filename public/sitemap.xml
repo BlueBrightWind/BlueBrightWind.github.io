@@ -2,9 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://bluebrightwind.github.io/categories/index.html</loc>
+    <loc>https://bluebrightwind.github.io/2024/03/15/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/</loc>
     
-    <lastmod>2023-07-24</lastmod>
+    <lastmod>2024-03-15</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -13,7 +13,16 @@
   <url>
     <loc>https://bluebrightwind.github.io/tags/index.html</loc>
     
-    <lastmod>2023-07-24</lastmod>
+    <lastmod>2024-03-15</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://bluebrightwind.github.io/categories/index.html</loc>
+    
+    <lastmod>2024-03-15</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -22,7 +31,7 @@
   <url>
     <loc>https://bluebrightwind.github.io/2022/12/23/VisionTransformer/</loc>
     
-    <lastmod>2023-07-24</lastmod>
+    <lastmod>2024-03-15</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -31,7 +40,7 @@
   <url>
     <loc>https://bluebrightwind.github.io/2022/12/28/Termux-2/</loc>
     
-    <lastmod>2023-07-24</lastmod>
+    <lastmod>2024-03-15</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -40,7 +49,7 @@
   <url>
     <loc>https://bluebrightwind.github.io/2023/03/18/Orangepi-1/</loc>
     
-    <lastmod>2023-07-24</lastmod>
+    <lastmod>2024-03-15</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -58,64 +67,64 @@
 
   <url>
     <loc>https://bluebrightwind.github.io/</loc>
-    <lastmod>2023-07-24</lastmod>
+    <lastmod>2024-03-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   
   <url>
-    <loc>https://bluebrightwind.github.io/tags/%E6%89%8B%E6%9C%BA%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
-    <lastmod>2023-07-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://bluebrightwind.github.io/tags/Termux/</loc>
-    <lastmod>2023-07-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://bluebrightwind.github.io/tags/%E9%A6%99%E6%A9%99%E6%B4%BE5/</loc>
-    <lastmod>2023-07-24</lastmod>
+    <lastmod>2024-03-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://bluebrightwind.github.io/tags/yolov5/</loc>
-    <lastmod>2023-07-24</lastmod>
+    <lastmod>2024-03-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://bluebrightwind.github.io/tags/rk3588s/</loc>
-    <lastmod>2023-07-24</lastmod>
+    <lastmod>2024-03-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://bluebrightwind.github.io/tags/%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/</loc>
-    <lastmod>2023-07-24</lastmod>
+    <loc>https://bluebrightwind.github.io/tags/%E6%89%8B%E6%9C%BA%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
+    <lastmod>2024-03-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://bluebrightwind.github.io/tags/VisionTransformer/</loc>
-    <lastmod>2023-07-24</lastmod>
+    <loc>https://bluebrightwind.github.io/tags/Termux/</loc>
+    <lastmod>2024-03-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://bluebrightwind.github.io/tags/%E5%BC%80%E5%90%AF-SSH-%E6%9C%8D%E5%8A%A1/</loc>
-    <lastmod>2023-07-24</lastmod>
+    <lastmod>2024-03-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bluebrightwind.github.io/tags/%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/</loc>
+    <lastmod>2024-03-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bluebrightwind.github.io/tags/VisionTransformer/</loc>
+    <lastmod>2024-03-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -123,22 +132,22 @@
 
   
   <url>
-    <loc>https://bluebrightwind.github.io/categories/Termux/</loc>
-    <lastmod>2023-07-24</lastmod>
+    <loc>https://bluebrightwind.github.io/categories/%E9%A6%99%E6%A9%99%E6%B4%BE5/</loc>
+    <lastmod>2024-03-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://bluebrightwind.github.io/categories/%E9%A6%99%E6%A9%99%E6%B4%BE5/</loc>
-    <lastmod>2023-07-24</lastmod>
+    <loc>https://bluebrightwind.github.io/categories/Termux/</loc>
+    <lastmod>2024-03-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://bluebrightwind.github.io/categories/%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/</loc>
-    <lastmod>2023-07-24</lastmod>
+    <lastmod>2024-03-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
