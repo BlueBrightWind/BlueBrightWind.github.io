@@ -1,11 +1,10 @@
 ---
 title: 【香橙派】RK3588搭建 C++ RKNN 开发环境指南
 date: 2024-12-30 21:27:18
-cover:
+cover: index.webp
 tags:
     - 香橙派
     - rk3588
-    - docker
 categories:
     - 香橙派
 ---
