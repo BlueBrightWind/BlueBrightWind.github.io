@@ -1,0 +1,199 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>【香橙派】RK3588s部署yolov5 - 训练部分 | 蓝灵风の博客</title><meta name="author" content="蓝灵风"><meta name="copyright" content="蓝灵风"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="克隆 yolov5 仓库yolov5 有很多个版本，这里我们采用官方修改过的 yolov5 进行训练，github 仓库 根据官方介绍，此仓库有如下特性：    基于 https:&#x2F;&#x2F;github.com&#x2F;ultralytics&#x2F;yolov5 代码修改，设配 rknpu 设备的部署优化    maxpool&#x2F; focus 优化，输出改为个 branch 分支的输出。以上优化代码使用插入宏实现，不影">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【香橙派】RK3588s部署yolov5 - 训练部分">
+<meta property="og:url" content="https://bluebrightwind.github.io/2023/03/18/Orangepi-1/index.html">
+<meta property="og:site_name" content="蓝灵风の博客">
+<meta property="og:description" content="克隆 yolov5 仓库yolov5 有很多个版本，这里我们采用官方修改过的 yolov5 进行训练，github 仓库 根据官方介绍，此仓库有如下特性：    基于 https:&#x2F;&#x2F;github.com&#x2F;ultralytics&#x2F;yolov5 代码修改，设配 rknpu 设备的部署优化    maxpool&#x2F; focus 优化，输出改为个 branch 分支的输出。以上优化代码使用插入宏实现，不影">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bluebrightwind.github.io/2023/03/18/Orangepi-1/index.png">
+<meta property="article:published_time" content="2023-03-17T17:31:27.000Z">
+<meta property="article:modified_time" content="2024-12-30T13:29:19.844Z">
+<meta property="article:author" content="蓝灵风">
+<meta property="article:tag" content="yolov5">
+<meta property="article:tag" content="香橙派">
+<meta property="article:tag" content="rk3588">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bluebrightwind.github.io/2023/03/18/Orangepi-1/index.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://bluebrightwind.github.io/2023/03/18/Orangepi-1/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '【香橙派】RK3588s部署yolov5 - 训练部分',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-12-30 21:29:19'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/mycss.css"><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="蓝灵风の博客" type="application/atom+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/2023/03/18/Orangepi-1/index.png')"><nav id="nav"><span id="blog-info"><a href="/" title="蓝灵风の博客"><span class="site-name">蓝灵风の博客</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">【香橙派】RK3588s部署yolov5 - 训练部分</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-03-17T17:31:27.000Z" title="发表于 2023-03-18 01:31:27">2023-03-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-12-30T13:29:19.844Z" title="更新于 2024-12-30 21:29:19">2024-12-30</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E9%A6%99%E6%A9%99%E6%B4%BE/">香橙派</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="【香橙派】RK3588s部署yolov5 - 训练部分"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="克隆-yolov5-仓库"><a href="#克隆-yolov5-仓库" class="headerlink" title="克隆 yolov5 仓库"></a>克隆 yolov5 仓库</h1><p>yolov5 有很多个版本，这里我们采用官方修改过的 yolov5 进行训练，<a target="_blank" rel="noopener" href="https://github.com/airockchip/yolov5">github 仓库</a></p>
+<p>根据官方介绍，此仓库有如下特性：</p>
+<ul>
+<li><p>  基于 <a target="_blank" rel="noopener" href="https://github.com/ultralytics/yolov5">https://github.com/ultralytics/yolov5</a> 代码修改，设配 rknpu 设备的部署优化</p>
+</li>
+<li><p>  maxpool/ focus 优化，输出改为个 branch 分支的输出。以上优化代码使用插入宏实现，不影响原来的训练逻辑，这个优化兼容修改前的权重，故支持官方给的预训练权重。</p>
+</li>
+<li><p>  修改激活函数 silu 为 relu</p>
+</li>
+<li><p>  训练的相关内容请参考 README.md 说明</p>
+</li>
+<li><p>导出模型时 python export.py –rknpu {rk_platform} 即可导出优化模型<br>  (rk_platform 支持 rk1808, rv1109, rv1126, rk3399pro, rk3566, rk3568, rk3588, rv1103, rv1106)</p>
+</li>
+</ul>
+<h1 id="准备数据集"><a href="#准备数据集" class="headerlink" title="准备数据集"></a>准备数据集</h1><p>如果只是为了适配 rknn 框架，可以忽略此步骤，使用官方的模型部署，<a target="_blank" rel="noopener" href="https://github.com/ultralytics/yolov5/releases/download/v6.0/yolov5s.pt">官方模型链接</a></p>
+<h2 id="数据集标注"><a href="#数据集标注" class="headerlink" title="数据集标注"></a>数据集标注</h2><p>一般使用 labelImg 工具进行标注，<a target="_blank" rel="noopener" href="https://github.com/heartexlabs/labelImg">github 仓库</a></p>
+<h2 id="数据集整理"><a href="#数据集整理" class="headerlink" title="数据集整理"></a>数据集整理</h2><p>将数据集整理为如下格式，在 yolov5 根目录下新建 myData 文件夹，并做如下处理：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">├─ yolov5根目录</span><br><span class="line">│    ├─ xxxxxx</span><br><span class="line">│    ├─ xxxxxx</span><br><span class="line">······</span><br><span class="line">│    ├─ myData</span><br><span class="line">│    │    ├─ (你的数据集名称)</span><br><span class="line">│    │    |    ├─ data.yaml</span><br><span class="line">│    │    │    ├─ train</span><br><span class="line">│    │    │    |    ├─ images</span><br><span class="line">│    │    │    |    └─ labels</span><br><span class="line">│    │    |    ├─ valid</span><br><span class="line">│    │    │    |    ├─ images</span><br><span class="line">│    │    │    |    └─ labels</span><br><span class="line">│    │    ├─ (你的数据集2)</span><br><span class="line">│    │    ├─ (你的数据集3)</span><br><span class="line">│    │    ├─ (xxxxxxxxxx)</span><br><span class="line">······</span><br></pre></td></tr></table></figure>
+
+<p>将标注好的数据集按比例分别放入 train 和 valid 中的 images、labels 中，同时每份数据集的 data.yaml 写入如下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nc: (你的数据集类别个数)</span><br><span class="line">names: [&#x27;(你的类别名称1)&#x27;, &#x27;(你的类别名称2)&#x27;, ......]</span><br><span class="line">train: myData/(你的数据集名称)/train/images</span><br><span class="line">val：myData/(你的数据集名称)/valid/images</span><br></pre></td></tr></table></figure>
+
+<p>最后，在 yolov5 根目录/models/yolov5s.yaml 文件中，将 nc 更改为你的数据集类别个数，比如，你的数据集有 2 个类别，分别检测人和车，那么将 nc 改为 2</p>
+<h1 id="模型训练"><a href="#模型训练" class="headerlink" title="模型训练"></a>模型训练</h1><p>将 yolov5s.pt 模型文件放在 yolov5 根目录下，输入以下指令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python train.py --data myData/(你的数据集名称)/data.yaml --cfg yolov5s.yaml --weights yolov5s.pt</span><br></pre></td></tr></table></figure>
+
+<h1 id="模型导出"><a href="#模型导出" class="headerlink" title="模型导出"></a>模型导出</h1><p>输入以下指令，可以得到 onnx 模型文件，以及模型对应的 anchor，这里保留 anchor 文件，在后处理部分会用到</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python export.py --weights (训练得到的模型) --include onnx --rknpu rk3588</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://bluebrightwind.github.io">蓝灵风</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://bluebrightwind.github.io/2023/03/18/Orangepi-1/">https://bluebrightwind.github.io/2023/03/18/Orangepi-1/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://bluebrightwind.github.io" target="_blank">蓝灵风の博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/yolov5/">yolov5</a><a class="post-meta__tags" href="/tags/%E9%A6%99%E6%A9%99%E6%B4%BE/">香橙派</a><a class="post-meta__tags" href="/tags/rk3588/">rk3588</a></div><div class="post_share"><div class="social-share" data-image="/2023/03/18/Orangepi-1/index.png" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/03/15/MySQL/" title="【面试总结】MySQL数据库面试总结"><img class="cover" src="/2024/03/15/MySQL/mysql-logo.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">【面试总结】MySQL数据库面试总结</div></div></a></div><div class="next-post pull-right"><a href="/2022/12/28/Termux-2/" title="【Termux】第2期：通过 ssh 连接手机 Termux 服务器"><img class="cover" src="/2022/12/28/Termux-2/termux.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">【Termux】第2期：通过 ssh 连接手机 Termux 服务器</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/12/30/Orangepi-Dev-Env/" title="【香橙派】RK3588搭建 C++ RKNN 开发环境指南"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-12-30</div><div class="title">【香橙派】RK3588搭建 C++ RKNN 开发环境指南</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">蓝灵风</div><div class="author-info__description">敏于思考，锐于实现</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://space.bilibili.com/21796142"><i class="fab"></i><span>B站主页</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%8B%E9%9A%86-yolov5-%E4%BB%93%E5%BA%93"><span class="toc-number">1.</span> <span class="toc-text">克隆 yolov5 仓库</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="toc-number">2.</span> <span class="toc-text">准备数据集</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E6%A0%87%E6%B3%A8"><span class="toc-number">2.1.</span> <span class="toc-text">数据集标注</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E6%95%B4%E7%90%86"><span class="toc-number">2.2.</span> <span class="toc-text">数据集整理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83"><span class="toc-number">3.</span> <span class="toc-text">模型训练</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E5%AF%BC%E5%87%BA"><span class="toc-number">4.</span> <span class="toc-text">模型导出</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/30/Orangepi-Dev-Env/" title="【香橙派】RK3588搭建 C++ RKNN 开发环境指南">【香橙派】RK3588搭建 C++ RKNN 开发环境指南</a><time datetime="2024-12-30T13:27:18.000Z" title="发表于 2024-12-30 21:27:18">2024-12-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/15/MySQL/" title="【面试总结】MySQL数据库面试总结"><img src="/2024/03/15/MySQL/mysql-logo.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【面试总结】MySQL数据库面试总结"/></a><div class="content"><a class="title" href="/2024/03/15/MySQL/" title="【面试总结】MySQL数据库面试总结">【面试总结】MySQL数据库面试总结</a><time datetime="2024-03-15T12:02:48.000Z" title="发表于 2024-03-15 20:02:48">2024-03-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/18/Orangepi-1/" title="【香橙派】RK3588s部署yolov5 - 训练部分"><img src="/2023/03/18/Orangepi-1/index.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【香橙派】RK3588s部署yolov5 - 训练部分"/></a><div class="content"><a class="title" href="/2023/03/18/Orangepi-1/" title="【香橙派】RK3588s部署yolov5 - 训练部分">【香橙派】RK3588s部署yolov5 - 训练部分</a><time datetime="2023-03-17T17:31:27.000Z" title="发表于 2023-03-18 01:31:27">2023-03-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/12/28/Termux-2/" title="【Termux】第2期：通过 ssh 连接手机 Termux 服务器"><img src="/2022/12/28/Termux-2/termux.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【Termux】第2期：通过 ssh 连接手机 Termux 服务器"/></a><div class="content"><a class="title" href="/2022/12/28/Termux-2/" title="【Termux】第2期：通过 ssh 连接手机 Termux 服务器">【Termux】第2期：通过 ssh 连接手机 Termux 服务器</a><time datetime="2022-12-28T13:21:42.000Z" title="发表于 2022-12-28 21:21:42">2022-12-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/12/26/Termux-1/" title="【Termux】第1期：在手机中安装Linux系统"><img src="/2022/12/26/Termux-1/termux.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【Termux】第1期：在手机中安装Linux系统"/></a><div class="content"><a class="title" href="/2022/12/26/Termux-1/" title="【Termux】第1期：在手机中安装Linux系统">【Termux】第1期：在手机中安装Linux系统</a><time datetime="2022-12-26T15:45:15.000Z" title="发表于 2022-12-26 23:45:15">2022-12-26</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By 蓝灵风</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="255,255,255" opacity="0.9" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></body></html>
