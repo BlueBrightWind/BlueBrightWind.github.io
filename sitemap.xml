@@ -88,13 +88,6 @@
   </url>
   
   <url>
-    <loc>https://bluebrightwind.github.io/tags/yolov5/</loc>
-    <lastmod>2025-01-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://bluebrightwind.github.io/tags/%E6%89%8B%E6%9C%BA%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
     <lastmod>2025-01-02</lastmod>
     <changefreq>weekly</changefreq>
@@ -103,6 +96,13 @@
   
   <url>
     <loc>https://bluebrightwind.github.io/tags/Termux/</loc>
+    <lastmod>2025-01-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bluebrightwind.github.io/tags/yolov5/</loc>
     <lastmod>2025-01-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
