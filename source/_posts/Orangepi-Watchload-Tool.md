@@ -46,7 +46,7 @@ sudo apt install -y git
 cd ~
 git clone -b $WATCHLOAD_REPOSITORY_BRANCH --depth=1 $WATCHLOAD_REPOSITORY watchload
 cd watchload
-sudo bash install.sh
+bash install.sh
 
 # Clean Files
 # cd ~
