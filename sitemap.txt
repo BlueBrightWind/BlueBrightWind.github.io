@@ -2,15 +2,15 @@ https://bluebrightwind.github.io/2025/01/03/Orangepi-Watchload-Tool/
 https://bluebrightwind.github.io/2024/12/30/Orangepi-Dev-Env/
 https://bluebrightwind.github.io/2022/12/28/Termux-2/
 https://bluebrightwind.github.io/2023/03/18/Orangepi-Yolov5-Train/
-https://bluebrightwind.github.io/tags/index.html
 https://bluebrightwind.github.io/categories/index.html
+https://bluebrightwind.github.io/tags/index.html
 https://bluebrightwind.github.io/2022/12/26/Termux-1/
 https://bluebrightwind.github.io/
 https://bluebrightwind.github.io/tags/%E9%A6%99%E6%A9%99%E6%B4%BE/
 https://bluebrightwind.github.io/tags/rk3588/
+https://bluebrightwind.github.io/tags/yolov5/
 https://bluebrightwind.github.io/tags/%E6%89%8B%E6%9C%BA%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/
 https://bluebrightwind.github.io/tags/Termux/
-https://bluebrightwind.github.io/tags/yolov5/
 https://bluebrightwind.github.io/tags/%E5%BC%80%E5%90%AF-SSH-%E6%9C%8D%E5%8A%A1/
 https://bluebrightwind.github.io/categories/%E9%A6%99%E6%A9%99%E6%B4%BE/
 https://bluebrightwind.github.io/categories/Termux/
